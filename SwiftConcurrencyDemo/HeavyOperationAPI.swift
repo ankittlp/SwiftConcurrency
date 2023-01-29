@@ -11,6 +11,19 @@ enum HeavyOperationApiError: LocalizedError {
     case reserveNumberError
 }
 
+extension Array where Element == Int  {
+    
+    var reducedValue: Int {
+        get async throws {
+            return await Task {
+                self.reduce(0) { partialResult, i in
+                    partialResult + i
+                }
+            }.value
+        }
+    }
+}
+
 class HeavyOperationApi {
     
     private let sleepTime: UInt64 = 10
@@ -29,6 +42,20 @@ class HeavyOperationApi {
         
         return number
     }
+    
+    func heavyNumberArray(from: Int, to: Int, completion:  @escaping /*@Sendable*/ ([Int]) -> Void) {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            var number: [Int] = []
+            for i in from...to {
+                number.append(i)
+            }
+            
+            completion(number)
+        }
+    }
+   
     
     func heavyNumberArray(from: Int, to: Int) async throws -> [Int] {
         
@@ -84,26 +111,24 @@ class HeavyOperationApi {
         return try await numberTask.value
     }
     
-    func heavyNumberArray(from: Int, to: Int, completion:  @escaping /*@Sendable*/ ([Int]) -> Void) {
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            
-            var number: [Int] = []
-            for i in from...to {
-                number.append(i)
-            }
-            
-            completion(number)
+    @available(*, renamed: "heavyFilterEvenNumberFrom(arrayOf:)")
+    func heavyFilterEvenNumberFrom(arrayOf numbers: [Int], completion:  @escaping /*@Sendable*/ ([Int]) -> Void ) {
+        Task {
+            let result = await heavyFilterEvenNumberFrom(arrayOf: numbers)
+            completion(result)
         }
     }
     
-    func heavyFilterEvenNumberFrom(arrayOf numbers: [Int], completion:  @escaping /*@Sendable*/ ([Int]) -> Void ) {
+    
+    func heavyFilterEvenNumberFrom(arrayOf numbers: [Int]) async -> [Int] {
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            
-            completion(numbers.filter { number in
-                number % 2 == 0
-            })
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .userInitiated).async {
+                
+                continuation.resume(returning: numbers.filter { number in
+                    number % 2 == 0
+                })
+            }
         }
     }
     
@@ -117,6 +142,19 @@ class HeavyOperationApi {
         }
         
     }
+    
+    // The async version
+    func heavyRandomMapping<T>(arrayOf numbers: [Int], transform: @escaping @Sendable (Int) -> T) async -> [T] {
+        
+        return await Task {
+            let x = numbers.map { number in
+                
+                return transform(number)
+            }
+            return x
+        }.value
+    }
+   
     
     
 }

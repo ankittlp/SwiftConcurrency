@@ -46,6 +46,7 @@ class AsyncAwaitVM {
     ///   - start: start number
     ///   - end: end number
     ///   - completionHandler: A closure for coompletion
+    @available(*, renamed: "multipleHeavyAsynchronousCallBackTask(start:end:)")
     func multipleHeavyAsynchronousCallBackTask(start: Int, end: Int, completionHandler: @escaping ([Int]) -> Void) {
         //1. Gets the array of numbers (A dummy heavy operation)
         HeavyOperationApi.shared.heavyNumberArray(from: start, to: end) { numbers in
@@ -61,4 +62,22 @@ class AsyncAwaitVM {
             }
         }
     }
+    
+    func multipleHeavyAsynchronousAsyncTask(start: Int, end: Int) async -> Int {
+        // 1 Gets the array of numbers (A dummy heavy operation)
+        let heavyNumberArray = (try? await HeavyOperationApi.shared.heavyNumberArray(from: start, to: end))  ?? [0]
+        // 2 Using the numbers array to fillter for Even number (A Dummy heavy operation)
+        let heavyFilterEvenNumberFrom = await HeavyOperationApi.shared.heavyFilterEvenNumberFrom(arrayOf: heavyNumberArray)
+        // 3 Doing Random mapping of even numbers array (A Dummy Heavy operation)
+        let heavyRandomMappingArrray = await HeavyOperationApi.shared.heavyRandomMapping(arrayOf: heavyFilterEvenNumberFrom, transform: { number in
+            return number + 10000000
+        })
+        // 4 async thowable computed proopety
+        let reducedValue = (try? await heavyRandomMappingArrray.reducedValue ) ?? 0
+        // 5 return
+        return  reducedValue
+    }
+    
+    
+    
 }

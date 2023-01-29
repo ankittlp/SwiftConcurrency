@@ -18,7 +18,8 @@ class AsyncAwaitViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        
+        //multipleTaskCompletionType()
+        //multipleTaskAsyncType()
         
     }
     
@@ -31,6 +32,23 @@ class AsyncAwaitViewController: UIViewController {
         printWithThreadInfo(tag: "Task finished number count- \(numbers.count)")
     }
     
+    @IBAction func asyncTaskCallBack(_ sender: UIButton) {
+        asyncAwaitVM.someHeavyAsynchronousCallBackTask(start: 4, end: 100) { numbers in
+            printWithThreadInfo(tag: "Task finished number count- \(numbers.count)")
+        }
+        
+    }
+    
+    @IBAction func asyncConcurrencyTask(_ sender: UIButton) {
+        
+        
+        Task {
+            try? await asyncAwaitVM.someHeavyAsynchronousConcurrencyTask(start: 5, end: 100)
+        }
+    }
+    
+    
+    
     @IBAction func errorHandling(_ sender: UIButton) {
         Task {
             do {
@@ -40,6 +58,22 @@ class AsyncAwaitViewController: UIViewController {
                 print("Task failed with error: \(error)")
             }
         }
+    }
+    
+    @IBAction func multipleTaskCompletionType() {
+        asyncAwaitVM.multipleHeavyAsynchronousCallBackTask(start: 5, end: 200) { numbers in
+            printWithThreadInfo(tag: "Task finished number count- \(numbers.count)")
+        }
+    }
+    
+    @IBAction func multipleTaskAsyncType() {
+        
+        Task {
+            let number = await asyncAwaitVM.multipleHeavyAsynchronousAsyncTask(start: 5, end: 200)
+            printWithThreadInfo(tag: "Task finished reduced - \(number)")
+        }
+        
+        
     }
     
     

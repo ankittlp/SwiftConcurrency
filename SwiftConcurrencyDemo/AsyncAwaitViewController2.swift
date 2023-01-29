@@ -33,29 +33,31 @@ class AsyncAwaitViewController2: UIViewController {
         
 //        Task {
 //
-//            let number = await someHeavyAsynchronousConcurrencyTask(start: 1, end: 1000)
+//            let number = await AsyncAwaitViewModel().someHeavyAsynchronousConcurrencyIsolatedTask(start: 1, end: 1000)
 //
 //        }
+//
         
         
-        
-        
+        self.label.updateText(textS: "")
         Task {
             do {
 
-                let number = try await someHeavyAsynchronousConcurrencyIsolatedTask(start: 5, end: 200)
+                let number = try await self.someHeavyAsynchronousConcurrencyIsolatedTask(start: 5, end: 200)
                 print("Number -> \(number)")
+                await self.label.updateText(textS: "")
                 self.label.text = "from asychronousApiCallbackType"
             } catch {
                 print("Request failed with error: \(error)")
             }
         }
         
-        DispatchQueue(label: "s").async { [self] in
-            Task {
-                label.text = ""
-            }
-        }
+//        DispatchQueue(label: "s").async { [self] in
+//            Task {
+//                printWithThreadInfo(tag: "Inside Task")
+//                label.text = ""
+//            }
+//        }
         
 //        let apiTask = Task {
 //            do {
@@ -147,6 +149,7 @@ class AsyncAwaitViewController2: UIViewController {
             await MainActor.run(body: {
                 self.label.text = "from asychronousApiCallbackType"
             })*/
+            
             return number
         }.value
         // 3 Once Task is complete, suspension is revoked and it is to notice that OS may resume on any other arbitary thread other then which starts the task.

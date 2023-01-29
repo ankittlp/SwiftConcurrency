@@ -19,6 +19,8 @@
 		BCBF32E428E5748900A07333 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCBF32E228E5748900A07333 /* Main.storyboard */; };
 		BCBF32E628E5748B00A07333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCBF32E528E5748B00A07333 /* Assets.xcassets */; };
 		BCBF32E928E5748B00A07333 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCBF32E728E5748B00A07333 /* LaunchScreen.storyboard */; };
+		BCE217D129866B1A005A0318 /* StructuredConcurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE217D029866B19005A0318 /* StructuredConcurrencyViewController.swift */; };
+		BCE217D329866B34005A0318 /* StructuredConcurrencyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE217D229866B34005A0318 /* StructuredConcurrencyVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		BCBF32E528E5748B00A07333 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCBF32E828E5748B00A07333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCBF32EA28E5748B00A07333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCE217D029866B19005A0318 /* StructuredConcurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredConcurrencyViewController.swift; sourceTree = "<group>"; };
+		BCE217D229866B34005A0318 /* StructuredConcurrencyVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredConcurrencyVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		BCBF32DB28E5748900A07333 /* SwiftConcurrencyDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BCE217CF29866ABE005A0318 /* StructuredConcurrency */,
 				BC65363A2951F275001F7F1D /* AsyncAwait */,
 				BCBF32DC28E5748900A07333 /* AppDelegate.swift */,
 				BCBF32DE28E5748900A07333 /* SceneDelegate.swift */,
@@ -91,6 +96,15 @@
 				BC071FB02950BF97005B6CF4 /* HeavyOperationAPI.swift */,
 			);
 			path = SwiftConcurrencyDemo;
+			sourceTree = "<group>";
+		};
+		BCE217CF29866ABE005A0318 /* StructuredConcurrency */ = {
+			isa = PBXGroup;
+			children = (
+				BCE217D029866B19005A0318 /* StructuredConcurrencyViewController.swift */,
+				BCE217D229866B34005A0318 /* StructuredConcurrencyVM.swift */,
+			);
+			path = StructuredConcurrency;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,11 +180,13 @@
 			files = (
 				BCBF32E128E5748900A07333 /* AsyncAwaitViewController2.swift in Sources */,
 				BC14533C29410A22005D2866 /* ASyncAwaitViewModel.swift in Sources */,
+				BCE217D329866B34005A0318 /* StructuredConcurrencyVM.swift in Sources */,
 				BC071FB12950BF98005B6CF4 /* HeavyOperationAPI.swift in Sources */,
 				BC071FAD2950B3A8005B6CF4 /* GlobalFunctions.swift in Sources */,
 				BCBF32DD28E5748900A07333 /* AppDelegate.swift in Sources */,
 				BC071FAF2950B420005B6CF4 /* AsyncAwaitViewController.swift in Sources */,
 				BC65363C2951F2AB001F7F1D /* AsyncAwaitVM.swift in Sources */,
+				BCE217D129866B1A005A0318 /* StructuredConcurrencyViewController.swift in Sources */,
 				BCBF32DF28E5748900A07333 /* SceneDelegate.swift in Sources */,
 				BC47DCAD28EFF8DF00CE0633 /* DemoListViewController.swift in Sources */,
 			);

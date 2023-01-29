@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4O7-im-sEf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4O7-im-sEf">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -104,27 +104,75 @@
             </objects>
             <point key="canvasLocation" x="-528" y="15"/>
         </scene>
-        <!--Async Await View Controller2-->
+        <!--Async Await View Controller-->
         <scene sceneID="1pA-hl-yw3">
             <objects>
-                <viewController storyboardIdentifier="AsyncAwaitViewController" id="DWg-RC-Q2Z" customClass="AsyncAwaitViewController2" customModule="SwiftConcurrencyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AsyncAwaitViewController" id="DWg-RC-Q2Z" customClass="AsyncAwaitViewController" customModule="SwiftConcurrencyDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cIi-6M-agr">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJf-4l-xqK">
-                                <rect key="frame" x="20" y="141" width="350" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Synchronous Heavy Operation"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lxV-Gz-Hue">
+                                <rect key="frame" x="20" y="156.66666666666663" width="350" height="226"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJf-4l-xqK">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Synchronous Heavy Operation"/>
+                                        <connections>
+                                            <action selector="syncTask:" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="Kne-pp-S8z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPf-n4-Tkb">
+                                        <rect key="frame" x="0.0" y="34.333333333333343" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Async Call Back Task"/>
+                                        <connections>
+                                            <action selector="asyncTaskCallBack:" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="pnL-uZ-ssO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdK-kJ-iCG">
+                                        <rect key="frame" x="0.0" y="68.666666666666686" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Async Concurrency Task"/>
+                                        <connections>
+                                            <action selector="asyncConcurrencyTask:" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="8ml-P1-JHt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yuf-kh-eTA">
+                                        <rect key="frame" x="0.0" y="103.00000000000003" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Async Concurrency Task (Error Handling)"/>
+                                        <connections>
+                                            <action selector="errorHandling:" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="4PN-8j-hQL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WR8-2e-Thc">
+                                        <rect key="frame" x="0.0" y="137.33333333333334" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="MultipleTask (PyramidOfDoom)"/>
+                                        <connections>
+                                            <action selector="multipleTaskCompletionType" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="ekb-6E-1SS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uex-YS-dqK">
+                                        <rect key="frame" x="0.0" y="171.66666666666666" width="350" height="54.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="MultipleTask AsyncConcurrency (PyramidOfDoomFixed)"/>
+                                        <connections>
+                                            <action selector="multipleTaskAsyncType" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="PkQ-xW-o4i"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try with @MainActor : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ky0-dd-d3H">
-                                <rect key="frame" x="20" y="111" width="171" height="21"/>
+                                <rect key="frame" x="20" y="111" width="171" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yPt-d1-kG9">
-                                <rect key="frame" x="221" y="106" width="51" height="31"/>
+                                <rect key="frame" x="221" y="105.66666666666667" width="51" height="31.000000000000014"/>
                                 <connections>
                                     <action selector="switchValueChange:" destination="DWg-RC-Q2Z" eventType="valueChanged" id="maZ-1z-UlY"/>
                                 </connections>
@@ -133,11 +181,11 @@
                         <viewLayoutGuide key="safeArea" id="fAX-Uf-rON"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IJf-4l-xqK" firstAttribute="top" secondItem="fAX-Uf-rON" secondAttribute="top" constant="50" id="0TY-HB-6fN"/>
                             <constraint firstItem="Ky0-dd-d3H" firstAttribute="leading" secondItem="fAX-Uf-rON" secondAttribute="leading" constant="20" id="9q9-Nm-MKS"/>
-                            <constraint firstItem="IJf-4l-xqK" firstAttribute="leading" secondItem="fAX-Uf-rON" secondAttribute="leading" constant="20" id="Og4-oM-Ipf"/>
-                            <constraint firstItem="fAX-Uf-rON" firstAttribute="trailing" secondItem="IJf-4l-xqK" secondAttribute="trailing" constant="20" id="RTd-4C-Rxb"/>
+                            <constraint firstItem="lxV-Gz-Hue" firstAttribute="leading" secondItem="fAX-Uf-rON" secondAttribute="leading" constant="20" id="Zb3-ww-1iw"/>
                             <constraint firstItem="yPt-d1-kG9" firstAttribute="leading" secondItem="Ky0-dd-d3H" secondAttribute="trailing" constant="30" id="aSC-fg-fUj"/>
+                            <constraint firstItem="fAX-Uf-rON" firstAttribute="trailing" secondItem="lxV-Gz-Hue" secondAttribute="trailing" constant="20" id="eeX-UQ-52l"/>
+                            <constraint firstItem="lxV-Gz-Hue" firstAttribute="top" secondItem="yPt-d1-kG9" secondAttribute="bottom" constant="20" id="g1j-OU-gh2"/>
                             <constraint firstItem="Ky0-dd-d3H" firstAttribute="top" secondItem="fAX-Uf-rON" secondAttribute="top" constant="20" id="g7f-gA-387"/>
                             <constraint firstItem="yPt-d1-kG9" firstAttribute="centerY" secondItem="Ky0-dd-d3H" secondAttribute="centerY" id="r71-VW-Wb8"/>
                         </constraints>

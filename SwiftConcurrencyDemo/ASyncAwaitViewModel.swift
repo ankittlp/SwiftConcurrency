@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
- class AsyncAwaitViewModel1/*: Sendable*/ {
+ class AsyncAwaitViewModel/*: Sendable*/ {
      var x: Person?  //= Person(firstName: "", lastName: "")
      
      let label: UILabel = UILabel()
@@ -147,3 +147,9 @@ class Person {
 }
 
 
+extension UILabel {
+    
+    func updateText(textS : String) {
+        text = textS
+    }
+}
