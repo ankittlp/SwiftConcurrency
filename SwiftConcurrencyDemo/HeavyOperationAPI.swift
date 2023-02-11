@@ -7,8 +7,11 @@
 
 import Foundation
 
+
 enum HeavyOperationApiError: LocalizedError {
+    
     case reserveNumberError
+    case diceValueIsGreaterThanRequired
 }
 
 extension Array where Element == Int  {
@@ -21,6 +24,59 @@ extension Array where Element == Int  {
                 }
             }.value
         }
+    }
+}
+
+extension Int {
+    static var random: Int {
+        get async throws {
+            
+            let randomNumber = Int.random(in: 0...6)
+            
+            if reserveNumbers.contains(where: { reserveNum in
+                return reserveNum == randomNumber
+            }) {
+                printWithThreadInfo(tag: "Throwing Error for random number \(randomNumber)")
+                throw HeavyOperationApiError.reserveNumberError
+            }
+            
+            
+            /* Do it for testing:
+             * Comment the cancellation check to enable returing of parent task oonly after all the task are finished
+             */
+            
+            // Checking the task before perfing the heavy task.
+//            do {
+//                try Task.checkCancellation()
+//            }catch {
+//                printWithThreadInfo(tag: "checkCancellation -random value \(error)")
+//                throw error
+//            }
+            let waitTime = Swift.max(3,randomNumber)
+            printWithThreadInfo(tag: "Waiting for \(waitTime) sec")
+            try? await Task.sleep(seconds: Double(waitTime))
+            
+            /* Do it for testing:
+             * Comment the cancellation check to enable returing of parent task oonly after all the task are finished
+             */
+            
+            // Checking for cancellation after the suspention is relived.
+//            do {
+//                try Task.checkCancellation()
+//            }catch {
+//                printWithThreadInfo(tag: "checkCancellation after sleep -random value \(error)")
+//                throw error
+//            }
+            
+            return randomNumber
+        }
+    }
+}
+
+extension Task where Success == Never, Failure == Never {
+    static func sleep(seconds: Double) async throws {
+        let duration = UInt64(seconds * 1_000_000_000)
+        try await Task.sleep(nanoseconds: duration)
     }
 }
 
@@ -155,6 +211,8 @@ class HeavyOperationApi {
         }.value
     }
    
+    
+    
     
     
 }

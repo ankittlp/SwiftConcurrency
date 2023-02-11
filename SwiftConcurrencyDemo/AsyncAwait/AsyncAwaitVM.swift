@@ -78,6 +78,24 @@ class AsyncAwaitVM {
         return  reducedValue
     }
     
+    func runTwoParallelTasks() async {
+         
+        Task {
+            _ = try await HeavyOperationApi.shared.heavyNumberArray(from: 4, to: 300)
+        }
+        
+        Task {
+            _ = try await HeavyOperationApi.shared.heavyNumberArray(from: 1001, to: 1200)
+        }
+        
+    }
     
+    func runTwoParallelTasksStructured() async throws -> [Int] {
+         
+        async let numberOne =  HeavyOperationApi.shared.heavyNumberArray(from: 4, to: 300)
+        async  let numberTwo = HeavyOperationApi.shared.heavyNumberArray(from: 1001, to: 1200)
+        
+        return try await numberOne + numberTwo
+    }
     
 }

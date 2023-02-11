@@ -12,6 +12,7 @@
 		BC071FB12950BF98005B6CF4 /* HeavyOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC071FB02950BF97005B6CF4 /* HeavyOperationAPI.swift */; };
 		BC14533C29410A22005D2866 /* ASyncAwaitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC14533B29410A22005D2866 /* ASyncAwaitViewModel.swift */; };
 		BC47DCAD28EFF8DF00CE0633 /* DemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47DCAC28EFF8DF00CE0633 /* DemoListViewController.swift */; };
+		BC4BFCFE298C52C300AF2F57 /* PingPong.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BFCFD298C52C300AF2F57 /* PingPong.swift */; };
 		BC65363C2951F2AB001F7F1D /* AsyncAwaitVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65363B2951F2AB001F7F1D /* AsyncAwaitVM.swift */; };
 		BCBF32DD28E5748900A07333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBF32DC28E5748900A07333 /* AppDelegate.swift */; };
 		BCBF32DF28E5748900A07333 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBF32DE28E5748900A07333 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		BC071FB02950BF97005B6CF4 /* HeavyOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyOperationAPI.swift; sourceTree = "<group>"; };
 		BC14533B29410A22005D2866 /* ASyncAwaitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASyncAwaitViewModel.swift; sourceTree = "<group>"; };
 		BC47DCAC28EFF8DF00CE0633 /* DemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoListViewController.swift; sourceTree = "<group>"; };
+		BC4BFCFD298C52C300AF2F57 /* PingPong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingPong.swift; sourceTree = "<group>"; };
 		BC65363B2951F2AB001F7F1D /* AsyncAwaitVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitVM.swift; sourceTree = "<group>"; };
 		BCBF32D928E5748900A07333 /* SwiftConcurrencyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftConcurrencyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBF32DC28E5748900A07333 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				BC14533B29410A22005D2866 /* ASyncAwaitViewModel.swift */,
 				BC071FAC2950B3A8005B6CF4 /* GlobalFunctions.swift */,
 				BC071FB02950BF97005B6CF4 /* HeavyOperationAPI.swift */,
+				BC4BFCFD298C52C300AF2F57 /* PingPong.swift */,
 			);
 			path = SwiftConcurrencyDemo;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				BC071FAD2950B3A8005B6CF4 /* GlobalFunctions.swift in Sources */,
 				BCBF32DD28E5748900A07333 /* AppDelegate.swift in Sources */,
 				BC071FAF2950B420005B6CF4 /* AsyncAwaitViewController.swift in Sources */,
+				BC4BFCFE298C52C300AF2F57 /* PingPong.swift in Sources */,
 				BC65363C2951F2AB001F7F1D /* AsyncAwaitVM.swift in Sources */,
 				BCE217D129866B1A005A0318 /* StructuredConcurrencyViewController.swift in Sources */,
 				BCBF32DF28E5748900A07333 /* SceneDelegate.swift in Sources */,

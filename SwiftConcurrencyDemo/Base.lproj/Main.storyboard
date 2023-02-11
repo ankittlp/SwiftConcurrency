@@ -63,7 +63,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vPI-Df-7Nb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Structureed Concurrency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vPI-Df-7Nb">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -72,6 +72,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="PkB-mb-I6y" kind="show" id="u6a-6P-Jjo"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tMB-YF-gAQ" style="IBUITableViewCellStyleDefault" id="qwH-tB-IW2">
                                         <rect key="frame" x="0.0" y="105.33333587646484" width="390" height="43.666667938232422"/>
@@ -113,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lxV-Gz-Hue">
-                                <rect key="frame" x="20" y="156.66666666666663" width="350" height="226"/>
+                                <rect key="frame" x="20" y="156.66666666666663" width="350" height="349"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJf-4l-xqK">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="34.333333333333336"/>
@@ -163,6 +166,30 @@
                                             <action selector="multipleTaskAsyncType" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="PkQ-xW-o4i"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O21-QC-ZvG">
+                                        <rect key="frame" x="0.0" y="226.00000000000003" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="async task parallel unstructured task"/>
+                                        <connections>
+                                            <action selector="multipleTaskAsyncTypeParallel" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="qyp-2e-1xm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeZ-jv-vUl">
+                                        <rect key="frame" x="0.0" y="260.33333333333337" width="350" height="54.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="async task parallel unstructured detached task"/>
+                                        <connections>
+                                            <action selector="multipleTaskAsyncTypeParallelDetached" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="dyt-RV-Ixf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4G-nE-QJd">
+                                        <rect key="frame" x="0.0" y="314.66666666666663" width="350" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="async task parallel structured task"/>
+                                        <connections>
+                                            <action selector="multipleTaskAsyncTypeParallelStructured" destination="DWg-RC-Q2Z" eventType="touchUpInside" id="XZt-QX-QE6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try with @MainActor : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ky0-dd-d3H">
@@ -198,6 +225,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7j-yz-3ua" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="376" y="15"/>
+        </scene>
+        <!--Structured Concurrency View Controller-->
+        <scene sceneID="alR-JY-WQI">
+            <objects>
+                <viewController storyboardIdentifier="StructuredConcurrencyViewController" id="PkB-mb-I6y" customClass="StructuredConcurrencyViewController" customModule="SwiftConcurrencyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iI4-Xj-C88">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qog-A1-DlX">
+                                <rect key="frame" x="20" y="131" width="350" height="103"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9D3-w7-gCU">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="MultipleTask - independent "/>
+                                        <connections>
+                                            <action selector="sequentialDiceValuesTask:" destination="PkB-mb-I6y" eventType="touchUpInside" id="o20-H5-7rJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYB-wE-bdV">
+                                        <rect key="frame" x="0.0" y="34.333333333333343" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="MultipleTask -Parallel Async-let"/>
+                                        <connections>
+                                            <action selector="parallerDiceValuesTask:" destination="PkB-mb-I6y" eventType="touchUpInside" id="RX7-fu-gsR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsn-mV-wne">
+                                        <rect key="frame" x="0.0" y="68.666666666666657" width="350" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Implicit await on aync-let"/>
+                                        <connections>
+                                            <action selector="doNotAwaitDiceValue" destination="PkB-mb-I6y" eventType="touchUpInside" id="wpm-2v-p6n"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="O9l-Ye-bDI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="O9l-Ye-bDI" firstAttribute="trailing" secondItem="qog-A1-DlX" secondAttribute="trailing" constant="20" id="83u-pH-U04"/>
+                            <constraint firstItem="qog-A1-DlX" firstAttribute="top" secondItem="O9l-Ye-bDI" secondAttribute="top" constant="40" id="B7V-s7-At8"/>
+                            <constraint firstItem="qog-A1-DlX" firstAttribute="leading" secondItem="O9l-Ye-bDI" secondAttribute="leading" constant="20" id="HT3-MV-SHE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Tih-ZR-Ci3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dni-kw-olt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="375" y="755"/>
         </scene>
     </scenes>
     <resources>

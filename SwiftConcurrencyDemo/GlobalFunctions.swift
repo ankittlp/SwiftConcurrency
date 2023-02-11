@@ -11,6 +11,7 @@ func printWithThreadInfo(tag: String) {
     print("Thread \(Thread.current) - \(tag) - \(Thread.isMainThread)")
 }
 
-let reserveNumbers = [4 , 3000, 5000]
+let reserveNumbers = [4, 3000, 5000]
+
 
 

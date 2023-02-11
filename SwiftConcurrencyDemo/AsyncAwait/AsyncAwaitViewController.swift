@@ -41,7 +41,6 @@ class AsyncAwaitViewController: UIViewController {
     
     @IBAction func asyncConcurrencyTask(_ sender: UIButton) {
         
-        
         Task {
             try? await asyncAwaitVM.someHeavyAsynchronousConcurrencyTask(start: 5, end: 100)
         }
@@ -73,6 +72,36 @@ class AsyncAwaitViewController: UIViewController {
             printWithThreadInfo(tag: "Task finished reduced - \(number)")
         }
         
+        
+    }
+    
+    @IBAction func multipleTaskAsyncTypeParallel() {
+        
+        Task {
+            await asyncAwaitVM.runTwoParallelTasks()
+            printWithThreadInfo(tag: "After multipleTaskAsyncTypeParallel")
+        }
+        
+        
+    }
+    
+    @IBAction func multipleTaskAsyncTypeParallelDetached() {
+        
+        Task.detached(priority: .background) {
+            await self.asyncAwaitVM.runTwoParallelTasks()
+            printWithThreadInfo(tag: "After multipleTaskAsyncTypeParallel")
+        }
+    }
+    
+    @IBAction func multipleTaskAsyncTypeParallelStructured() {
+        Task {
+            do {
+                let number = try await asyncAwaitVM.runTwoParallelTasksStructured()
+                printWithThreadInfo(tag: "Task multipleTaskAsyncTypeParallelStructured finished - \(number)")
+            } catch {
+                print("Task failed with error: \(error)")
+            }
+        }
         
     }
     
