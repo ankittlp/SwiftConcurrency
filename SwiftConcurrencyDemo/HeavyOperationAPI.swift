@@ -28,8 +28,25 @@ extension Array where Element == Int  {
 }
 
 extension Int {
+    
+    static var randomPakkaError: Int {
+        
+        get async throws {
+            try? await Task.sleep(seconds: Double(1))
+            throw HeavyOperationApiError.reserveNumberError
+            
+        }
+    }
+    
+    static func randomWait(time: Int) async throws {
+       try await Task {
+            return try await Task.sleep(seconds:Double(time))
+        }.value
+    }
+    
     static var random: Int {
         get async throws {
+            
             
             let randomNumber = Int.random(in: 0...6)
             
@@ -42,31 +59,41 @@ extension Int {
             
             
             /* Do it for testing:
-             * Comment the cancellation check to enable returing of parent task oonly after all the task are finished
+             * Comment the cancellation check to enable returing of parent task only after all the task are finished
              */
             
             // Checking the task before perfing the heavy task.
-//            do {
-//                try Task.checkCancellation()
-//            }catch {
-//                printWithThreadInfo(tag: "checkCancellation -random value \(error)")
-//                throw error
-//            }
+            do {
+                try Task.checkCancellation()
+            }catch {
+                printWithThreadInfo(tag: "checkCancellation -random value \(error)")
+                throw error
+            }
+            
             let waitTime = Swift.max(3,randomNumber)
             printWithThreadInfo(tag: "Waiting for \(waitTime) sec")
-            try? await Task.sleep(seconds: Double(waitTime))
+            //try? await Task.sleep(seconds: Double(waitTime))
+            try await Int.randomWait(time: waitTime)
+            /* HARK:
+             * Un comment to check if long running task is implicit awaited or not without awaiting child tasks.
+             * Condition for testing `forgetDiceShot`
+             */
+            /*
+            for i in 0...10000 {
+                printWithThreadInfo(tag: "From loop  in random \(i)")
+            }*/
             
             /* Do it for testing:
              * Comment the cancellation check to enable returing of parent task oonly after all the task are finished
              */
             
             // Checking for cancellation after the suspention is relived.
-//            do {
-//                try Task.checkCancellation()
-//            }catch {
-//                printWithThreadInfo(tag: "checkCancellation after sleep -random value \(error)")
-//                throw error
-//            }
+            do {
+                try Task.checkCancellation()
+            }catch {
+                printWithThreadInfo(tag: "checkCancellation after sleep -random value \(error)")
+                throw error
+            }
             
             return randomNumber
         }

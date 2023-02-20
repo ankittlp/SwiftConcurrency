@@ -92,9 +92,15 @@ class AsyncAwaitVM {
     
     func runTwoParallelTasksStructured() async throws -> [Int] {
          
-        async let numberOne =  HeavyOperationApi.shared.heavyNumberArray(from: 4, to: 300)
-        async  let numberTwo = HeavyOperationApi.shared.heavyNumberArray(from: 1001, to: 1200)
+        async let numberOne =  HeavyOperationApi.shared.heavyNumberArray(from: 2500, to: 3000) // Error at 3000
+        async  let numberTwo = HeavyOperationApi.shared.heavyNumberArray(from: 4000, to: 4999) // No error
         
+        
+        /* HARK:
+         * Flip the await sequence like numberTwo + numberOne --> this will let the numberTwo task to complete without error or cancellation even if numberOne task error out earlier.
+         * this is because number one task is on backgound and Parent task will not be informed about its error as its not being awaited.
+         * Only task which  is being  awaited will propagate error to parent task and cancellation.
+         */
         return try await numberOne + numberTwo
     }
     
