@@ -80,12 +80,23 @@ class AsyncAwaitVM {
     
     func runTwoParallelTasks() async {
          
-        Task {
+        /*Task {
             _ = try await HeavyOperationApi.shared.heavyNumberArray(from: 4, to: 300)
         }
         
         Task {
             _ = try await HeavyOperationApi.shared.heavyNumberArray(from: 1001, to: 1200)
+        }*/
+        
+        let actorObj = NumberBadhao()
+        Task {
+            printWithThreadInfo(tag:"task 1")
+            await actorObj.increament("task 1")
+        }
+        
+        Task {
+            printWithThreadInfo(tag:"task 2")
+            await actorObj.increament("task 2")
         }
         
     }
@@ -104,4 +115,29 @@ class AsyncAwaitVM {
         return try await numberOne + numberTwo
     }
     
+}
+
+
+actor NumberBadhao {
+    
+    var arrayOFInt = [Int]()
+    
+    func increament(_ token: String) async {
+        arrayOFInt.append(1)
+        arrayOFInt.append(2)
+        
+        try? await Task.sleep(seconds: 5)
+        
+        //arrayOFInt.remove(at: 0)
+        //arrayOFInt.remove(at: 0)
+        arrayOFInt.removeAll()
+        
+        for int in arrayOFInt {
+            print("My number is  \(int) - token \(token)")
+        }
+        
+        
+        
+        print("Done change in actor \(token)")
+    }
 }

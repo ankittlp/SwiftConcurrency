@@ -33,14 +33,17 @@ class StructuredConcurrencyVM {
         p.ping(context: "parallerDiceValues")
         
         // first dice execute in parallel
-        async let firstDice =  Int.random // To understand more clearly use Int.randomPakkaError, this will throw error and as we are awaiting on firstDice the task associated with secondDice will be marked cancelled and implicit awaited.
+        async let firstDice =  Int.randomPakkaError // To understand more clearly use Int.randomPakkaError, this will throw error and as we are awaiting on firstDice the task associated with secondDice will be marked cancelled and implicit awaited.
         
         // second dice execute in parallel
         
         async let secondDice = Int.random
+        async let threeDice = Int.random
         // At this point we await to get the result of all the parallel executed task, Also used try as Int.random is Throwable async property.
-        let total = try await firstDice + secondDice // if we comment second dice in this line, it will  be implicit awaited and cancelled. read wwdc structured concurency for more  details
-        
+        let totalArr =  try await [secondDice, firstDice, threeDice] // if we comment second dice in this line, it will  be implicit awaited and cancelled. read wwdc structured concurency for more  details
+        let total = totalArr.reduce(0) { partialResult, x in
+            return partialResult + x
+        }
         p.pong(context: "parallerDiceValues")
         if total > maxValue {
             throw HeavyOperationApiError.diceValueIsGreaterThanRequired

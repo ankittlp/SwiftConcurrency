@@ -32,7 +32,9 @@ extension Int {
     static var randomPakkaError: Int {
         
         get async throws {
-            try? await Task.sleep(seconds: Double(1))
+            //try? await Task.sleep(seconds: Double(1))
+            try? await Int.randomWait(time: 1)
+            printWithThreadInfo(tag: "Throwing Error for random number randomPakkaError")
             throw HeavyOperationApiError.reserveNumberError
             
         }
@@ -72,14 +74,19 @@ extension Int {
             
             let waitTime = Swift.max(3,randomNumber)
             printWithThreadInfo(tag: "Waiting for \(waitTime) sec")
-            //try? await Task.sleep(seconds: Double(waitTime))
-            try await Int.randomWait(time: waitTime)
+            do {
+                try await Task.sleep(seconds: Double(waitTime))
+            }catch {
+                printWithThreadInfo(tag: "Catch error onrandom sleep \(error)")
+            }
+            
+            //try await Int.randomWait(time: waitTime)
             /* HARK:
              * Un comment to check if long running task is implicit awaited or not without awaiting child tasks.
              * Condition for testing `forgetDiceShot`
              */
             /*
-            for i in 0...10000 {
+            for i in 0...100000 {
                 printWithThreadInfo(tag: "From loop  in random \(i)")
             }*/
             
